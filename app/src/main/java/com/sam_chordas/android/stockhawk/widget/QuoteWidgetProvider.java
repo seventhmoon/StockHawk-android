@@ -31,9 +31,6 @@ public class QuoteWidgetProvider extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
 
-        //
-//        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_collection);
-
         // Create intent to launch MainActivity
         Intent intent = new Intent(context, MyStocksActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
