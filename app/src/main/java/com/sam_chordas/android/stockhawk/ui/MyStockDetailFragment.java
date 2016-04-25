@@ -1,8 +1,9 @@
 package com.sam_chordas.android.stockhawk.ui;
 
-import android.app.Fragment;
+
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,19 +31,42 @@ import java.util.TreeMap;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MyStockDetailActivityFragment extends Fragment {
+public class MyStockDetailFragment extends Fragment {
 
-    public MyStockDetailActivityFragment() {
+    private static final String ARG_SYMBOL = "SYMBOL";
+    private String mSymbol;
+
+    public MyStockDetailFragment() {
     }
+
+    public static MyStockDetailFragment newInstance(String symbol){
+        MyStockDetailFragment f = new MyStockDetailFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_SYMBOL, symbol);
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mSymbol = getArguments().getString(ARG_SYMBOL);
+
+        }
+    }
+
+
+    private static final int DEFAULT_NUMBER_OF_DAYS = 7;
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd", Locale.US);
 
     private com.db.chart.view.LineChartView mLineChart;
     private LineSet mDataSet;
-    private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd", Locale.US);
     private DescriptiveStatistics mStats = new DescriptiveStatistics();
 
-    private void loadData() {
+    private void loadData(String symbol) {
         ApiManager apiManager = new ApiManager(Volley.newRequestQueue(getActivity()));
-        apiManager.getHistoricalData("FB", 14, new Response.Listener<HistoricalData>() {
+        apiManager.getHistoricalData(mSymbol, DEFAULT_NUMBER_OF_DAYS, new Response.Listener<HistoricalData>() {
             @Override
             public void onResponse(HistoricalData historicalData) {
                 mDataSet = new LineSet();
@@ -99,8 +123,9 @@ public class MyStockDetailActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_stock_detail, container, false);
         mLineChart = (LineChartView) rootView.findViewById(R.id.linechart);
 
+        String symbol = getArguments().getString("Symbol");
 
-        loadData();
+        loadData(symbol);
 
 
         return rootView;

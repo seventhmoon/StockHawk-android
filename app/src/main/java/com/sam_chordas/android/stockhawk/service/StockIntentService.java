@@ -4,12 +4,16 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.android.gms.gcm.TaskParams;
 
 /**
  * Created by sam_chordas on 10/1/15.
  */
 public class StockIntentService extends IntentService {
+
+  public static final String TAG = StockIntentService.class.getSimpleName();
 
   public StockIntentService(){
     super(StockIntentService.class.getName());
@@ -28,6 +32,11 @@ public class StockIntentService extends IntentService {
     }
     // We can call OnRunTask from the intent service to force it to run immediately instead of
     // scheduling a task.
-    stockTaskService.onRunTask(new TaskParams(intent.getStringExtra("tag"), args));
+    try {
+      stockTaskService.onRunTask(new TaskParams(intent.getStringExtra("tag"), args));
+    }catch (NumberFormatException ex){
+      Log.d(TAG, ex.toString());
+      Toast.makeText(getApplicationContext(), "Not a valid Code", Toast.LENGTH_SHORT).show();
+    }
   }
 }

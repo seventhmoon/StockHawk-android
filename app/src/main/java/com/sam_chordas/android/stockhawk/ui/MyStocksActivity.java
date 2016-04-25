@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -41,6 +42,9 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
   /**
    * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
    */
+
+
+  public static final String SYMBOL = "SYMBOL";
 
   /**
    * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -85,12 +89,11 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
     recyclerView.addOnItemTouchListener(new RecyclerViewItemClickListener(this,
             new RecyclerViewItemClickListener.OnItemClickListener() {
               @Override public void onItemClick(View v, int position) {
-                //TODO:
-                // do something on item click
-                Intent intent = new Intent(getBaseContext(), MyStockDetailActivity.class);
 
-                String message = "TEST";
-                intent.putExtra("MESSAGE", message);
+                Intent intent = new Intent(getBaseContext(), MyStockDetailActivity.class);
+                  String symbol = ((TextView) v.findViewById(R.id.stock_symbol)).getText().toString();
+
+                intent.putExtra(SYMBOL, symbol);
                 startActivity(intent);
 
               }

@@ -2,12 +2,15 @@ package com.sam_chordas.android.stockhawk.rest;
 
 import android.content.ContentProviderOperation;
 import android.util.Log;
+
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
-import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by sam_chordas on 10/8/15.
@@ -76,18 +79,23 @@ public class Utils {
         QuoteProvider.Quotes.CONTENT_URI);
     try {
       String change = jsonObject.getString("Change");
-      builder.withValue(QuoteColumns.SYMBOL, jsonObject.getString("symbol"));
-      builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(jsonObject.getString("Bid")));
-      builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(
-          jsonObject.getString("ChangeinPercent"), true));
-      builder.withValue(QuoteColumns.CHANGE, truncateChange(change, false));
-      builder.withValue(QuoteColumns.ISCURRENT, 1);
-      if (change.charAt(0) == '-'){
-        builder.withValue(QuoteColumns.ISUP, 0);
-      }else{
-        builder.withValue(QuoteColumns.ISUP, 1);
-      }
-
+      String symbol = jsonObject.getString("symbol");
+      String bidPrice = jsonObject.getString("Bid");
+//      if (bidPrice == null || bidPrice.equalsIgnoreCase("null")){
+//        throw new RemoteException("Unexcepted value of bidPrice: " + bidPrice);
+//      }else {
+        builder.withValue(QuoteColumns.SYMBOL, symbol);
+        builder.withValue(QuoteColumns.BIDPRICE, truncateBidPrice(bidPrice));
+        builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(
+                jsonObject.getString("ChangeinPercent"), true));
+        builder.withValue(QuoteColumns.CHANGE, truncateChange(change, false));
+        builder.withValue(QuoteColumns.ISCURRENT, 1);
+        if (change.charAt(0) == '-') {
+          builder.withValue(QuoteColumns.ISUP, 0);
+        } else {
+          builder.withValue(QuoteColumns.ISUP, 1);
+        }
+//      }
     } catch (JSONException e){
       e.printStackTrace();
     }
