@@ -79,11 +79,11 @@ public class QuoteWidgetRemoteViewsService extends RemoteViewsService {
                 views.setTextViewText(R.id.stock_symbol, data.getString(data.getColumnIndex
                         (getResources().getString(R.string.symbol))));
 
-//                if (data.getInt(data.getColumnIndex(QuoteColumns.ISUP)) == 1) {
-//                    views.setInt(R.id.change, getResources().getString(R.string.string_set_background_resource), R.drawable.percent_change_pill_green);
-//                } else {
-//                    views.setInt(R.id.change, getResources().getString(R.string.string_set_background_resource), R.drawable.percent_change_pill_red);
-//                }
+                if (data.getInt(data.getColumnIndex(QuoteColumns.ISUP)) == 1) {
+                    views.setInt(R.id.change, getResources().getString(R.string.string_set_background_resource), R.drawable.percent_change_pill_green);
+                } else {
+                    views.setInt(R.id.change, getResources().getString(R.string.string_set_background_resource), R.drawable.percent_change_pill_red);
+                }
 
                 if (Utils.showPercent) {
                     views.setTextViewText(R.id.change, data.getString(data.getColumnIndex(QuoteColumns.PERCENT_CHANGE)));

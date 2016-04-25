@@ -8,7 +8,7 @@
     <string name="symbol_search">Symbol Search</string>
     <string name="content_test">Search for a Stock Symbol</string>
     <string name="input_hint" translatable="false">FB</string>
-    <string name="input_prefill"></string>
+    <string name="input_prefill" translatable="false"/>
     <string name="widget_title">Today\'s Market</string>
     <string name="network_toast">Uh-oh! This app requires an internet connection</string>
     <string name="title_activity_my_stock_detail">MyStockDetailActivity</string>
@@ -18,4 +18,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="symbol" translatable="false">symbol</string>
+    <string name="desc_add">add</string>
+    <string name="desc_chart">Chart</string>
+    <string name="string_set_background_resource" translatable="false">setBackgroundResource</string>
 </resources>

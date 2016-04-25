@@ -9,6 +9,7 @@
     tools:context=".ui.MyStockDetailFragment">
 
     <com.db.chart.view.LineChartView
+        android:contentDescription="@string/desc_chart"
         xmlns:chart="http://schemas.android.com/apk/res-auto"
         android:id="@+id/linechart"
         android:layout_width="match_parent"
