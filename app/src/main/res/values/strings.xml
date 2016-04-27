@@ -21,4 +21,5 @@
     <string name="desc_add">add</string>
     <string name="desc_chart">Chart</string>
     <string name="string_set_background_resource" translatable="false">setBackgroundResource</string>
+    <string name="message_stock_exists">This stock is already saved!</string>
 </resources>
